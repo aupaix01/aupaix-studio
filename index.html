@@ -1,46 +1,28 @@
 <html><head><style>
-  body{background:#000;color:#d4af37;font-family:'Orbitron',sans-serif;margin:0;display:flex;flex-direction:column;align-items:center;padding:40px}
-  .header{text-align:center;margin-bottom:50px}
-  h1{font-size:4em;letter-spacing:15px;margin:0;text-shadow:0 0 20px #d4af37}
-  .sub{color:#888;letter-spacing:5px;text-transform:uppercase}
-  .game-container{display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:30px;width:90%}
-  .game-card{border:1px solid #d4af37;background:rgba(20,20,20,0.8);padding:20px;position:relative;transition:0.3s;cursor:pointer;overflow:hidden}
-  .game-card:hover{background:#d4af37;color:#000;box-shadow:0 0 50px #d4af37}
-  .agent-badge{position:absolute;top:10px;right:10px;font-size:10px;border:1px solid #d4af37;padding:3px 8px}
-  .status{font-family:monospace;font-size:12px;margin-top:20px;border-top:1px solid #444;padding-top:10px}
-  .play-btn{margin-top:20px;padding:15px;width:100%;background:transparent;border:1px solid #d4af37;color:inherit;font-weight:bold;text-transform:uppercase;cursor:pointer}
+  body{background:#000;color:#d4af37;font-family:'Orbitron',sans-serif;display:flex;flex-direction:column;align-items:center;padding:40px}
+  .studio-header{border-bottom:2px solid #d4af37;width:100%;text-align:center;padding-bottom:20px;margin-bottom:40px}
+  .game-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:30px;width:100%}
+  .game-card{border:1px solid #d4af37;padding:25px;background:#0a0a0a;transition:0.4s;cursor:pointer}
+  .game-card:hover{background:#d4af37;color:#000;box-shadow:0 0 30px #d4af37}
+  .tag{font-size:10px;background:#d4af37;color:black;padding:2px 5px;font-weight:bold}
+  .console{background:#050505;color:#00ff00;padding:10px;font-family:monospace;font-size:11px;margin-top:15px;height:60px;overflow:hidden}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap' rel='stylesheet'>
 </head><body>
-  <div class='header'>
-    <h1>STUDIO AUPAIX</h1>
-    <div class='sub'>Agent-Driven Reality Engine</div>
-  </div>
-
-  <div class='game-container'>
-    <div class='game-card'>
-      <div class='agent-badge'>AGENT: ARCHITECT</div>
-      <h2>PROJECT: NEURAL VOID</h2>
-      <p>A survival horror experience generated in real-time by Agent Architect.</p>
-      <div class='status' id='g1'>SYNCHRONIZING WORLD SEED...</div>
-      <button class='play-btn'>INITIATE SESSION</button>
-    </div>
-
-    <div class='game-card'>
-      <div class='agent-badge'>AGENT: LOGIC</div>
-      <h2>PROJECT: HEX CONTROL</h2>
-      <p>Strategy game where the rules change every 60 seconds by AI Logic.</p>
-      <div class='status' id='g2'>CALCULATING NEW RULES...</div>
-      <button class='play-btn'>JOIN BATTLE</button>
+  <div class='studio-header'><h1>STUDIO AUPAIX</h1><p>AGENT-GENERATED ENTERTAINMENT</p></div>
+  <div class='game-grid'>
+    <div class='game-card' onclick="window.location.href='games/neural_void/index.html'">
+      <span class='tag'>AGENT: ARCHITECT</span>
+      <h2>NEURAL VOID</h2>
+      <p>A procedural cyber-runner generated and updated by AI.</p>
+      <div class='console' id='c1'>> Monitoring player patterns...</div>
+      <button style='width:100%;margin-top:10px;padding:10px;background:transparent;color:inherit;border:1px solid currentColor'>LAUNCH GAME</button>
     </div>
   </div>
-
   <script>
-    function updateLiveFeed() {
-      const logs = ["Level 4 generated...", "Agent balance check: OK", "Injecting player challenge...", "Optimizing graphics..."];
-      document.getElementById('g1').innerText = logs[Math.floor(Math.random()*logs.length)];
-      document.getElementById('g2').innerText = 'RULESET V' + (Math.random()*10).toFixed(2);
-    }
-    setInterval(updateLiveFeed, 3000);
+    setInterval(() => {
+      const msgs = ["> Patch v1.02 applied", "> Difficulty auto-scaling...", "> Level seed updated", "> Neural link stable"];
+      document.getElementById('c1').innerText = msgs[Math.floor(Math.random()*msgs.length)];
+    }, 3000);
   </script>
 </body></html>
