@@ -1,46 +1,46 @@
 <html><head><style>
-  body{background:#000;color:#d4af37;font-family:'Segoe UI',Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding:50px;letter-spacing:1px}
-  .grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:40px;width:100%;max-width:1100px}
-  .card{border-left:4px solid #d4af37;padding:40px;background:#0a0a0a;box-shadow:20px 20px 60px #000;position:relative}
-  h1{font-weight:900;font-size:3em;text-transform:uppercase;margin-bottom:60px;background:linear-gradient(to right, #d4af37, #fef1b5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .btn{background:#d4af37;color:#000;padding:20px 40px;border:none;cursor:pointer;font-weight:900;width:100%;transition:0.4s}
-  .btn:hover{background:#fff;transform:translateY(-5px)}
-  #console{background:#050505;color:#00ff00;padding:20px;font-family:monospace;font-size:11px;height:150px;overflow-y:auto;border:1px solid #222;margin-top:20px}
-</style></head><body>
-  <h1>AUPAIX CORE V1</h1>
-  <div class='grid'>
-    <div class='card'>
-      <h3>NEURAL ARCHITECTURE</h3>
-      <div id='st'>NODE: OPERATIONAL<br>POWER: <span id='pwr'>SCANNING...</span></div>
-      <div id='console'>[SYSTEM] Neural Link Active...</div>
+  body{background:#000;color:#d4af37;font-family:'Orbitron',sans-serif;margin:0;display:flex;flex-direction:column;align-items:center;padding:40px}
+  .header{text-align:center;margin-bottom:50px}
+  h1{font-size:4em;letter-spacing:15px;margin:0;text-shadow:0 0 20px #d4af37}
+  .sub{color:#888;letter-spacing:5px;text-transform:uppercase}
+  .game-container{display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:30px;width:90%}
+  .game-card{border:1px solid #d4af37;background:rgba(20,20,20,0.8);padding:20px;position:relative;transition:0.3s;cursor:pointer;overflow:hidden}
+  .game-card:hover{background:#d4af37;color:#000;box-shadow:0 0 50px #d4af37}
+  .agent-badge{position:absolute;top:10px;right:10px;font-size:10px;border:1px solid #d4af37;padding:3px 8px}
+  .status{font-family:monospace;font-size:12px;margin-top:20px;border-top:1px solid #444;padding-top:10px}
+  .play-btn{margin-top:20px;padding:15px;width:100%;background:transparent;border:1px solid #d4af37;color:inherit;font-weight:bold;text-transform:uppercase;cursor:pointer}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+</head><body>
+  <div class='header'>
+    <h1>STUDIO AUPAIX</h1>
+    <div class='sub'>Agent-Driven Reality Engine</div>
+  </div>
+
+  <div class='game-container'>
+    <div class='game-card'>
+      <div class='agent-badge'>AGENT: ARCHITECT</div>
+      <h2>PROJECT: NEURAL VOID</h2>
+      <p>A survival horror experience generated in real-time by Agent Architect.</p>
+      <div class='status' id='g1'>SYNCHRONIZING WORLD SEED...</div>
+      <button class='play-btn'>INITIATE SESSION</button>
     </div>
-    <div class='card'>
-      <h3>COMMERCIAL LOGIC</h3>
-      <p style='font-size:24px;margin:10px 0'>MASTER LICENSE: ACTIVE</p>
-      <button class='btn' onclick='executeProtocol()'>GENERATE CRYPTO-LICENSE</button>
-      <div id='log-line' style='margin-top:10px;font-size:12px;color:#888'>Ready for deployment.</div>
+
+    <div class='game-card'>
+      <div class='agent-badge'>AGENT: LOGIC</div>
+      <h2>PROJECT: HEX CONTROL</h2>
+      <p>Strategy game where the rules change every 60 seconds by AI Logic.</p>
+      <div class='status' id='g2'>CALCULATING NEW RULES...</div>
+      <button class='play-btn'>JOIN BATTLE</button>
     </div>
   </div>
+
   <script>
-    function log(msg) {
-      const c = document.getElementById('console');
-      c.innerHTML += '<br>> ' + msg;
-      c.scrollTop = c.scrollHeight;
+    function updateLiveFeed() {
+      const logs = ["Level 4 generated...", "Agent balance check: OK", "Injecting player challenge...", "Optimizing graphics..."];
+      document.getElementById('g1').innerText = logs[Math.floor(Math.random()*logs.length)];
+      document.getElementById('g2').innerText = 'RULESET V' + (Math.random()*10).toFixed(2);
     }
-    async function syncCore() {
-      try {
-        const r = await fetch('./data/status.json?nocache=' + new Date().getTime());
-        const d = await r.json();
-        document.getElementById('pwr').innerText = d.studio_power || '100%_STABLE';
-        log('Core sync: ' + d.status);
-      } catch(e) { log('Sync pending...'); }
-    }
-    function executeProtocol() {
-      const id = 'AUX-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-      log('Encrypted License Generated: ' + id);
-      document.getElementById('log-line').innerText = 'LAST ACTION: ' + id;
-    }
-    setInterval(syncCore, 5000);
-    syncCore();
+    setInterval(updateLiveFeed, 3000);
   </script>
 </body></html>
