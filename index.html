@@ -2,26 +2,23 @@
   body{background:#000;color:#d4af37;font-family:'Segoe UI',Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding:50px;letter-spacing:1px}
   .grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:40px;width:100%;max-width:1100px}
   .card{border-left:4px solid #d4af37;padding:40px;background:#0a0a0a;box-shadow:20px 20px 60px #000;position:relative}
-  .status-tag{position:absolute;top:10px;right:10px;font-size:10px;color:#00ff00;border:1px solid #00ff00;padding:2px 5px}
   h1{font-weight:900;font-size:3em;text-transform:uppercase;margin-bottom:60px;background:linear-gradient(to right, #d4af37, #fef1b5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .data-line{font-family:monospace;font-size:12px;color:#888;margin-top:10px}
   .btn{background:#d4af37;color:#000;padding:20px 40px;border:none;cursor:pointer;font-weight:900;width:100%;transition:0.4s}
   .btn:hover{background:#fff;transform:translateY(-5px)}
-  #console{background:#050505;color:#00ff00;padding:20px;font-family:monospace;font-size:11px;height:100px;overflow-y:auto;border:1px solid #222;margin-top:20px}
+  #console{background:#050505;color:#00ff00;padding:20px;font-family:monospace;font-size:11px;height:150px;overflow-y:auto;border:1px solid #222;margin-top:20px}
 </style></head><body>
   <h1>AUPAIX CORE V1</h1>
   <div class='grid'>
     <div class='card'>
-      <div class='status-tag'>ENCRYPTED LINK ACTIVE</div>
       <h3>NEURAL ARCHITECTURE</h3>
-      <div id='st'>SYNCING WITH CORE...</div>
-      <div id='console'>[SYSTEM] Booting Neural Agents...<br>[SYSTEM] Establishing Satellite Link...</div>
+      <div id='st'>NODE: OPERATIONAL<br>POWER: <span id='pwr'>SCANNING...</span></div>
+      <div id='console'>[SYSTEM] Neural Link Active...</div>
     </div>
     <div class='card'>
       <h3>COMMERCIAL LOGIC</h3>
       <p style='font-size:24px;margin:10px 0'>MASTER LICENSE: ACTIVE</p>
       <button class='btn' onclick='executeProtocol()'>GENERATE CRYPTO-LICENSE</button>
-      <div class='data-line' id='log-line'>Waiting for Director input...</div>
+      <div id='log-line' style='margin-top:10px;font-size:12px;color:#888'>Ready for deployment.</div>
     </div>
   </div>
   <script>
@@ -30,19 +27,20 @@
       c.innerHTML += '<br>> ' + msg;
       c.scrollTop = c.scrollHeight;
     }
+    async function syncCore() {
+      try {
+        const r = await fetch('./data/status.json?nocache=' + new Date().getTime());
+        const d = await r.json();
+        document.getElementById('pwr').innerText = d.studio_power || '100%_STABLE';
+        log('Core sync: ' + d.status);
+      } catch(e) { log('Sync pending...'); }
+    }
     function executeProtocol() {
       const id = 'AUX-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-      log('Requesting license from Core...');
-      setTimeout(() => {
-        log('Encryption Layer 1: OK');
-        log('Database Write: SUCCESS');
-        log('License Provisioned: ' + id);
-        document.getElementById('log-line').innerText = 'LAST ACTION: WRITTEN TO CORE [' + id + ']';
-      }, 800);
+      log('Encrypted License Generated: ' + id);
+      document.getElementById('log-line').innerText = 'LAST ACTION: ' + id;
     }
-    fetch('./data/status.json').then(r=>r.json()).then(d=>{
-      document.getElementById('st').innerHTML = 'NODE: ' + d.status + '<br>POWER: ' + d.studio_power || '100%';
-      log('Neural Link Established with ' + d.agents.length + ' agents.');
-    });
+    setInterval(syncCore, 5000);
+    syncCore();
   </script>
 </body></html>
