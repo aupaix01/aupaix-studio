@@ -1,14 +1,15 @@
-import json; import time; from datetime import datetime; 
-def update_status():
+import json; import os; from datetime import datetime; 
+def sync_core():
+    if not os.path.exists('data'): os.makedirs('data')
     status = {
-        'status': 'ACTIVE',
-        'agents': ['Architect', 'Logic', 'Commercial'],
+        'status': 'OPERATIONAL',
+        'agents': ['Architect', 'Logic', 'Commercial', 'Security'],
         'lastUpdate': datetime.now().strftime('%H:%M:%S'),
-        'studio_power': '100%'
+        'studio_power': 'CORE_MAX_100%'
     }
     with open('data/status.json', 'w') as f:
         json.dump(status, f)
-    print('?? Status Geüpdatet door Logic Agent...')
+    print('?? Core Data Synced to Disk.')
 
 if __name__ == '__main__':
-    update_status()
+    sync_core()

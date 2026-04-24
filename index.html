@@ -41,7 +41,7 @@
       }, 800);
     }
     fetch('./data/status.json').then(r=>r.json()).then(d=>{
-      document.getElementById('st').innerHTML = 'NODE: ' + d.status + '<br>POWER: ' + d.studio_power;
+      document.getElementById('st').innerHTML = 'NODE: ' + d.status + '<br>POWER: ' + d.studio_power || '100%';
       log('Neural Link Established with ' + d.agents.length + ' agents.');
     });
   </script>
