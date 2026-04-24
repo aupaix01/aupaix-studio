@@ -1,28 +1,49 @@
-<html><head><style>
-  body{background:#000;color:#d4af37;font-family:'Orbitron',sans-serif;display:flex;flex-direction:column;align-items:center;padding:40px}
-  .studio-header{border-bottom:2px solid #d4af37;width:100%;text-align:center;padding-bottom:20px;margin-bottom:40px}
-  .game-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:30px;width:100%}
-  .game-card{border:1px solid #d4af37;padding:25px;background:#0a0a0a;transition:0.4s;cursor:pointer}
-  .game-card:hover{background:#d4af37;color:#000;box-shadow:0 0 30px #d4af37}
-  .tag{font-size:10px;background:#d4af37;color:black;padding:2px 5px;font-weight:bold}
-  .console{background:#050505;color:#00ff00;padding:10px;font-family:monospace;font-size:11px;margin-top:15px;height:60px;overflow:hidden}
-</style>
-<link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap' rel='stylesheet'>
-</head><body>
-  <div class='studio-header'><h1>STUDIO AUPAIX</h1><p>AGENT-GENERATED ENTERTAINMENT</p></div>
-  <div class='game-grid'>
-    <div class='game-card' onclick="window.location.href='games/neural_void/index.html'">
-      <span class='tag'>AGENT: ARCHITECT</span>
+<html><head>
+<link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@300&display=swap' rel='stylesheet'>
+<style>
+  body{background:#050505;color:#d4af37;font-family:'Orbitron',sans-serif;margin:0;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+  .header{width:100%;padding:40px;text-align:center;background:linear-gradient(to bottom, #111, transparent);border-bottom:1px solid rgba(212,175,55,0.2)}
+  h1{font-size:3.5em;margin:0;letter-spacing:15px;text-shadow:0 0 15px rgba(212,175,55,0.4)}
+  .live-feed{width:90%;max-width:1100px;background:#0a0a0a;border:1px solid #222;padding:15px;margin:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#00ff00}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(400px, 1fr));gap:30px;width:90%;margin-bottom:50px}
+  .card{background:#111;border:1px solid #d4af37;padding:30px;position:relative;transition:0.5s ease}
+  .card:hover{transform:scale(1.02);box-shadow:0 0 40px rgba(212,175,55,0.15)}
+  .badge{position:absolute;top:15px;right:15px;border:1px solid #d4af37;padding:4px 10px;font-size:10px}
+  .btn{width:100%;padding:15px;background:transparent;border:1px solid #d4af37;color:#d4af37;font-weight:900;cursor:pointer;margin-top:20px;text-transform:uppercase;letter-spacing:3px}
+  .btn:hover{background:#d4af37;color:black}
+</style></head><body>
+  <div class='header'>
+    <h1>STUDIO AUPAIX</h1>
+    <p style='color:#666;letter-spacing:5px'>GENERATIVE REALITY ENGINE</p>
+  </div>
+  
+  <div class='live-feed' id='feed'>[SYSTEM] Monitoring Global Agent Activity...</div>
+
+  <div class='grid'>
+    <div class='card'>
+      <div class='badge'>GENERATING</div>
       <h2>NEURAL VOID</h2>
-      <p>A procedural cyber-runner generated and updated by AI.</p>
-      <div class='console' id='c1'>> Monitoring player patterns...</div>
-      <button style='width:100%;margin-top:10px;padding:10px;background:transparent;color:inherit;border:1px solid currentColor'>LAUNCH GAME</button>
+      <p style='color:#888'>Survival horror. De omgeving verandert op basis van jouw hartslag (gesimuleerd door AI).</p>
+      <button class='btn' onclick="location.href='games/neural_void/index.html'">Initiate Session</button>
+    </div>
+    <div class='card'>
+      <div class='badge'>CALCULATING</div>
+      <h2>HEX CONTROL</h2>
+      <p style='color:#888'>Strategy. De regels buigen voor de slimste speler. De Agent leert van elke zet.</p>
+      <button class='btn'>Join Battle</button>
     </div>
   </div>
+
   <script>
+    const feed = document.getElementById('feed');
+    const updates = [
+      "Agent Architect: Level geometry adjusted in Neural Void.",
+      "Agent Logic: Global ruleset for Hex Control updated to v0.82.",
+      "Neural Link: Player behavior analysis complete. Increasing difficulty.",
+      "Core: Synchronizing game assets across global nodes."
+    ];
     setInterval(() => {
-      const msgs = ["> Patch v1.02 applied", "> Difficulty auto-scaling...", "> Level seed updated", "> Neural link stable"];
-      document.getElementById('c1').innerText = msgs[Math.floor(Math.random()*msgs.length)];
-    }, 3000);
+      feed.innerText = "[LIVE FEED] " + updates[Math.floor(Math.random()*updates.length)];
+    }, 4000);
   </script>
 </body></html>
